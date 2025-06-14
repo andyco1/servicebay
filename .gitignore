@@ -1,0 +1,43 @@
+# -------------------------------
+# Node (Angular)
+# -------------------------------
+node_modules/
+dist/
+.angular/
+.env
+.env.*.local
+
+# Angular test reports
+coverage/
+
+# -------------------------------
+# .NET (ASP.NET Core)
+# -------------------------------
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# EF Core tools
+Migrations/
+
+# Build results
+*.dll
+*.exe
+*.app
+*.pdb
+
+# Logs
+*.log
+
+# Visual Studio
+.vscode/
+.vs/
+
+# -------------------------------
+# System files
+# -------------------------------
+.DS_Store
+Thumbs.db
