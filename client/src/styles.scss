@@ -2,3 +2,23 @@
 
 /* Importing Bootstrap SCSS file. */
 @use 'bootstrap/scss/bootstrap';
+
+:root {
+    --color-primary: #1e2a38; /* Darker navy blue — main nav/sidebar */
+    --color-secondary: #4b5d6b; /* Cool steel blue — accents, borders */
+    --color-tertiary: #7aa7a3; /* Fresh teal-gray — hovers, highlights */
+
+    --color-accent: #ff6b35; /* Warm orange — CTAs, alerts */
+    --color-background: #f4f6f8; /* Slightly off-white — avoids eye strain */
+    --color-surface: #ffffff; /* Cards, modals, panels */
+    --color-text: #1c1c1c; /* Main readable text */
+    --color-text-muted: #6c757d; /* Subtext, placeholders */
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-background);
+}
