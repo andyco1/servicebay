@@ -38,6 +38,15 @@ module.exports = {
                 'key-spacing': 'error',
                 'space-before-blocks': 'error',
                 indent: 'off',
+                'array-element-newline': ['error', 'consistent'],
+                'prettier/prettier': [
+                    'warn',
+                    {
+                        printWidth: 120,
+                        endOfLine: 'auto',
+                        tabWidth: 4
+                    }
+                ],
                 '@typescript-eslint/no-empty-function': 0,
                 '@typescript-eslint/no-var-requires': 0,
                 '@typescript-eslint/no-explicit-any': 0,
