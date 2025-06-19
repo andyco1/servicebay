@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { User } from '../state/auth/auth.models';
+import { environment } from '../../environments/environment';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-    public login(email: string, password: string): Observable<{ user: User; token: string }> {
-        // Simulated backend logic
-        if (email === 'demo@example.com' && password === 'password') {
-            const user = { id: '1', email, name: 'Demo User' };
-            return of({ user, token: 'fake-jwt-token' }).pipe(delay(1000));
-        }
+    private readonly apiUrl = environment.apiUrl;
 
-        return throwError(() => new Error('Invalid credentials')).pipe(delay(1000));
+    constructor(private http: HttpClient) {}
+
+    public login(email: string, password: string): Observable<{ user: User; token: string }> {
+        return this.http.post<{ user: User; token: string }>(`${this.apiUrl}/Auth/login`, {
+            email,
+            password
+        });
     }
 }
