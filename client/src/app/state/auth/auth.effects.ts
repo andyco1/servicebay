@@ -21,7 +21,15 @@ export class AuthEffects {
                 switchMap(({ email, password }) =>
                     this.authService.login(email, password).pipe(
                         map((res) => AuthActions.loginSuccess({ user: res.user, token: res.token })),
-                        catchError((err) => of(AuthActions.loginFailure({ error: err.message })))
+                        catchError((err) => {
+                            let errorMessage = 'An unexpected error occurred. Please try again.';
+                            if (err.status === 401) {
+                                errorMessage = 'Invalid email or password.';
+                            } else if (err.status === 0) {
+                                errorMessage = 'Unable to connect to the server.';
+                            }
+                            return of(AuthActions.loginFailure({ error: errorMessage }));
+                        })
                     )
                 )
             )
