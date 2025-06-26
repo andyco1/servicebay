@@ -7,14 +7,24 @@
             <div class="mb-3">
                 <label>Email</label>
                 <input formControlName="email" type="email" class="form-control" />
+                @if (form.controls['email'].touched && form.controls['email'].invalid) {
+                    <div class="text-danger mt-1">
+                        @if (form.controls['email'].errors?.['required']) {
+                            Email is required.
+                        } @else if (form.controls['email'].errors?.['email']) {
+                            Please enter a valid email address.
+                        }
+                    </div>
+                }
             </div>
-
             <div class="mb-3">
                 <label>Password</label>
                 <input formControlName="password" type="password" class="form-control" />
+                @if (form.controls['password'].touched && form.controls['password'].invalid) {
+                    <div class="text-danger mt-1">Password is required.</div>
+                }
             </div>
-
-            <button class="btn btn-primary w-100" type="submit">Sign In</button>
+            <button class="btn btn-primary w-100" type="submit" [disabled]="form.invalid">Sign In</button>
         </form>
 
         <div *ngIf="error$ | async as error" class="alert alert-danger mt-3">
