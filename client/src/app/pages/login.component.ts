@@ -15,7 +15,7 @@ import { selectAuthError, selectAuthLoading } from '../state/auth/auth.selectors
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
-    public form: FormGroup;
+    public loginForm: FormGroup;
     public loading$!: Observable<boolean>;
     public error$!: Observable<string | null>;
 
@@ -23,7 +23,7 @@ export class LoginComponent {
         private fb: FormBuilder,
         private store: Store<{ auth: AuthState }>
     ) {
-        this.form = this.fb.group({
+        this.loginForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
@@ -33,11 +33,11 @@ export class LoginComponent {
     }
 
     public onSubmit(): void {
-        if (this.form.valid) {
-            const { email, password } = this.form.value;
+        if (this.loginForm.valid) {
+            const { email, password } = this.loginForm.value;
             this.store.dispatch(AuthActions.login({ email, password }));
         } else {
-            this.form.markAllAsTouched();
+            this.loginForm.markAllAsTouched();
         }
     }
 }
