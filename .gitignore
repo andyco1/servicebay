@@ -1,18 +1,16 @@
-# -------------------------------
+# ----------------------------------------
 # Node (Angular)
-# -------------------------------
+# ----------------------------------------
 node_modules/
 dist/
 .angular/
 .env
 .env.*.local
-
-# Angular test reports
 coverage/
 
-# -------------------------------
+# ----------------------------------------
 # .NET (ASP.NET Core)
-# -------------------------------
+# ----------------------------------------
 bin/
 obj/
 *.user
@@ -20,7 +18,7 @@ obj/
 *.userosscache
 *.sln.docstates
 
-# EF Core tools
+# EF Core Migrations
 Migrations/
 
 # Build results
@@ -32,12 +30,30 @@ Migrations/
 # Logs
 *.log
 
-# Visual Studio
+# Visual Studio and Rider
 .vscode/
 .vs/
+.idea/
 
-# -------------------------------
+# ----------------------------------------
+# Docker / PostgreSQL
+# ----------------------------------------
+postgres_data/
+docker-compose.override.yml
+
+# DB init scripts (optional)
+db/init.sql
+
+# ----------------------------------------
 # System files
-# -------------------------------
+# ----------------------------------------
 .DS_Store
 Thumbs.db
+
+# ----------------------------------------
+# Environment Files
+# ----------------------------------------
+.env
+.env.local
+.env.development
+.env.production
