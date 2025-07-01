@@ -1,28 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
-
-namespace ServiceBay.API.Controllers;
+using Microsoft.EntityFrameworkCore;
+using ServiceBay.API.Data;
+using ServiceBay.API.Models;
 
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginRequest request)
-    {
-        if (request.Email == "demo@example.com" && request.Password == "password")
-        {
-            var user = new { Id = 1, request.Email, Name = "Demo User" };
-            var token = "fake-jwt-token";
+    private readonly AppDbContext _context;
 
-            return Ok(new { user, token });
+    public AuthController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequest request)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+
+        if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+        {
+            return Unauthorized(new { error = "Invalid credentials" });
         }
 
-        return Unauthorized(new { error = "Invalid credentials" });
-    }
-}
+        // For now, use a fake token
+        var token = "fake-jwt-token";
 
-public class LoginRequest
-{
-    public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+        return Ok(new { user, token });
+    }
 }
